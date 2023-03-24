@@ -1,10 +1,10 @@
-import psycopg2
+#import psycopg2
 
 # connect to "chinook" database
-connection = psycopg2.connect(database="chinook")
+#connection = psycopg2.connect(database="chinook")
 
 # build a cursor object of the database
-cursor = connection.cursor()
+#cursor = connection.cursor()
 
 # Query 1 - select all records from the "Artist" table
 # cursor.execute('SELECT * FROM "Artist"')
@@ -22,17 +22,17 @@ cursor = connection.cursor()
 # cursor.execute('SELECT * FROM "Album" WHERE "ArtistId" = %s', [51])
 
 # Query 6 - select all tracks where the composer is "Queen" from the tracktable
-cursor.execute('SELECT * FROM "Track" WHERE "Composer" = %s', ["Queen"])
+#cursor.execute('SELECT * FROM "Track" WHERE "Composer" = %s', ["Queen"])
 
 # fetch the relults (multiple)
-results = cursor.fetchall()
+#results = cursor.fetchall()
 
 # fetch the results (single)
 # results = cursor.fetchone()
 
 # close the connection
-connection.close()
+#connection.close()
 
 # print results
-for result in results:
-    print(result)
+#for result in results:
+    #print(result)
