@@ -63,12 +63,12 @@ margret_hamilton = Programmer(
     famous_for = "Apollo 11"
 )
 
-margret_hamilton = Programmer(
-    first_name = "Margret",
-    last_name = "Hamilton",
-    gender = "F",
+bill_gates = Programmer(
+    first_name = "Bill",
+    last_name = "Gates",
+    gender = "M",
     nationality = "American",
-    famous_for = "Apollo 11"
+    famous_for = "Microsoft Office"
 )
 
 margret_hamilton = Programmer(
@@ -77,17 +77,75 @@ margret_hamilton = Programmer(
     gender = "F",
     nationality = "American",
     famous_for = "Apollo 11"
+)
+
+tim_berners_lee = Programmer(
+    first_name = "Tim",
+    last_name = "Berners-Lee",
+    gender = "M",
+    nationality = "British",
+    famous_for = "World Wide Web"
+)
+
+iryna_friaf = Programmer(
+    first_name = "Iryna",
+    last_name = "Friaf",
+    gender = "F",
+    nationality = "Ukraine",
+    famous_for = "Analytics of Databases"
 )
 
 # add each instance of our programmer to our session
-#session.add(ada_lovelace)
-session.add(alan_turing)
-session.add(grace_hopper)
-session.add(margret_hamilton)
-session.add(bill_gates)
+# session.add(ada_lovelace)
+# session.add(alan_turing)
+# session.add(grace_hopper)
+# session.add(margret_hamilton)
+# session.add(bill_gates)
+# session.add(tim_berners_lee)
+# session.add(iryna_friaf)
+
+
+# updating a single record
+# programmer = session.query(Programmer).filter_by(id=13).first()
+# programmer.famous_for = "World President"
+
+# update multiple records
+# people = session.query(Programmer)
+# for person in people:
+#     if person.gender == "F":
+#         person.gender = "Female"
+#     elif person.gender == "M":
+#         person.gender = "Male"
+#     else:
+#         print("Gender not defined")
+#     session.commit()
+
+
+# deleting a single record 
+fname = input("Enter a first name: ")
+lname = input("Enter a last name: ")
+programmer = session.query(Programmer).filter_by(first_name=fname, last_name=lname).first()
+# defensive programming
+if programmer is not None:
+    print("Programmer Found: ", programmer.first_name + " " + programmer.last_name)
+    confirmation = input("Are you sure you want to delete this record? (y/n) ")
+    if confirmation.lower() == "y":
+        session.delete(programmer)
+        session.commit()
+        print("Programmer has been deleted")
+    else:
+        print("Programmer not deleted")
+else:
+    print("No records")
+
+# delete multiple records
+programmers = session.query(Programmer)
+for programmer in programmers:
+    session.delete(programmer)
+    session.commit()
 
 # commit our session on the databse
-session.commit()
+# session.commit()
 
 # query the db to find all Programmers
 programmers = session.query(Programmer)
@@ -100,5 +158,3 @@ for programmer in programmers:
        programmer.famous_for,
        sep = " | " 
     )
-
-
